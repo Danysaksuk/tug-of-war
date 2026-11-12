@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FF5900">
+<title>Tug of War | Rider Gala Gaming Village</title>
+<link rel="icon" href="img/talabat-logo.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app" data-mode="player">
+
+<!-- ===================== PLAYER ===================== -->
+<main id="player" data-screen="menu" aria-label="Tug of War, player screen">
+  <header class="p-head">
+    <i class="accent"></i>
+    <span class="chip" id="pChip" role="status"><i></i><span id="pChipTxt">Connecting</span></span>
+    <img class="logo" alt="talabat" src="img/talabat-logo.png">
+  </header>
+
+  <section class="screen" id="pMenu">
+    <h1>Gaming Village</h1>
+    <p>Pick a game. Each one starts with a quick how-to video.</p>
+    <button class="game-card g-tug" id="gameTug" aria-label="Open Tug of War">
+      <svg class="gc-art" viewBox="0 0 120 70" aria-hidden="true"><path d="M2 40 Q60 52 118 40" fill="none" stroke="#F4EDE3" stroke-width="9" stroke-linecap="round"/><path d="M2 40 Q60 52 118 40" fill="none" stroke="#bdae9a" stroke-width="9" stroke-dasharray="3 8"/><line x1="60" y1="46" x2="60" y2="8" stroke="#F4EDE3" stroke-width="4" stroke-linecap="round"/><polygon points="60,8 30,18 60,28" fill="#CFFF00"/><circle cx="60" cy="46" r="8" fill="#CFFF00" stroke="#411517" stroke-width="3"/></svg>
+      <div class="gc-txt"><b>Tug of War</b><small>Team vs team. Tap fast, pull the rope.</small></div>
+      <span class="gc-go">Play</span>
+    </button>
+    <div class="game-card soon" aria-disabled="true"><div class="gc-txt"><b>More games</b><small>Coming soon</small></div></div>
+  </section>
+
+  <section class="screen" id="pPick">
+    <h1>Tug of War</h1>
+    <p>Pick your team. When the round starts, tap as fast as you can.</p>
+    <button class="team-card t0" id="pickA" aria-label="Join the orange team"><div><b id="pickAName">Team Orange</b><small id="pickACount">0 players</small></div>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 11h11.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H5z"/></svg></button>
+    <button class="team-card t1" id="pickB" aria-label="Join the purple team"><div><b id="pickBName">Team Purple</b><small id="pickBCount">0 players</small></div>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 11h11.2l-4.6-4.6L13 5l7 7-7 7-1.4-1.4 4.6-4.6H5z"/></svg></button>
+    <button class="linkbtn" id="practiceBtn">Try a practice round on your own</button>
+    <button class="linkbtn" id="howtoAgain">Watch how to play</button>
+    <button class="linkbtn" id="backMenu">Back to games</button>
+  </section>
+
+  <section class="screen" id="pPlay" data-ph="lobby">
+    <div class="top-row">
+      <div class="tn"><span id="myTeamName">Team</span><small id="myTeamSub">Waiting for the host</small></div>
+      <div class="timer" id="pTimer" aria-live="off">--</div>
+    </div>
+    <div class="rb" aria-hidden="true"><i id="pMark"></i></div>
+    <div class="rb-lab" aria-hidden="true"><span id="rbA">Orange</span><span id="rbB">Purple</span></div>
+    <div class="tapzone" id="tapzone">
+      <button class="tapbtn" id="tapbtn" disabled aria-label="Tap to pull the rope"><span><span class="big" id="tapBig">Wait</span><span class="sm" id="tapSm">for the host to start</span></span></button>
+    </div>
+    <div class="bot-row">
+      <div class="mytaps"><small>Your taps</small><span id="myTaps">0</span></div>
+      <button class="linkbtn" id="changeTeam">Change team</button>
+    </div>
+    <div id="pResult" aria-live="polite">
+      <h2 id="rTitle">Team wins!</h2>
+      <p id="rSub"></p>
+      <div class="stat"><b id="rTaps">0</b><span>taps from you</span></div>
+      <p id="rNext">Next round starts soon</p>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== HOST ===================== -->
+<main id="host" data-ph="lobby" data-pin="need" aria-label="Tug of War, big screen host view">
+  <header class="h-head">
+    <i class="accent"></i>
+    <div class="h-title">Tug of War<small>Rider Gala Gaming Village</small></div>
+    <div class="h-right">
+      <div class="h-tools">
+        <button class="tbtn" id="bSound" aria-pressed="false" aria-label="Sound" title="Sound">Sound</button>
+        <button class="tbtn" id="bPilot" aria-pressed="false" aria-label="Pilot tools" title="Pilot tools (P)">Pilot tools</button>
+        <button class="tbtn" id="bFs" aria-label="Full screen" title="Full screen (F)">Full screen</button>
+        <a class="tbtn" id="bPlayer" href="./" aria-label="Open the player view" title="Player view">Player view</a>
+      </div>
+      <img class="logo" alt="talabat" src="img/talabat-logo.png">
+    </div>
+  </header>
+
+  <section class="stagewrap">
+    <div class="hud">
+      <div class="series" aria-label="Series score"><span class="sa" id="sNameA">Orange</span><b id="sA">0</b><span>:</span><b id="sB">0</b><span class="sb" id="sNameB">Purple</span></div>
+      <div class="conn" id="hConn"><i></i><span id="hConnTxt">Demo only</span></div>
+    </div>
+    <div class="timer-big" id="hTimer" aria-live="off"></div>
+    <svg id="arena" viewBox="0 110 1600 430" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Tug of war rope and teams">
+      <rect x="0" y="480" width="1600" height="80" fill="#2b0d0f"/>
+      <rect x="396" y="150" width="44" height="330" fill="#FF5900" opacity=".28"/>
+      <rect x="1160" y="150" width="44" height="330" fill="#8318D8" opacity=".45"/>
+      <line x1="440" y1="150" x2="440" y2="480" stroke="#F4EDE3" stroke-width="4" stroke-dasharray="10 10" opacity=".7"/>
+      <line x1="1160" y1="150" x2="1160" y2="480" stroke="#F4EDE3" stroke-width="4" stroke-dasharray="10 10" opacity=".7"/>
+      <line x1="800" y1="380" x2="800" y2="480" stroke="#CFFF00" stroke-width="6" opacity=".8"/>
+      <g id="rope"><path id="ropeA" d="M0 340 Q800 348 1600 340" fill="none" stroke="#F4EDE3" stroke-width="15" stroke-linecap="round"/>
+        <path id="ropeB" d="M0 340 Q800 348 1600 340" fill="none" stroke="#bdae9a" stroke-width="15" stroke-dasharray="5 12"/></g>
+      <g id="figsA"></g><g id="figsB"></g>
+      <g id="flag" transform="translate(800,340)"><line x1="0" y1="0" x2="0" y2="-120" stroke="#F4EDE3" stroke-width="5" stroke-linecap="round"/>
+        <polygon id="pennant" points="0,-120 64,-96 0,-72" fill="#CFFF00"/><circle r="16" fill="#CFFF00" stroke="#411517" stroke-width="5"/></g>
+    </svg>
+    <div class="overlay" id="lobby">
+      <div class="card">
+        <div id="qr" aria-label="QR code to join"></div>
+        <div>
+          <h2>Scan to join</h2>
+          <p>Pick a team on your phone. When the round starts, tap as fast as you can to pull the rope. Teams are scored by taps per player, so a smaller team can still win.</p>
+          <div class="joinlink" id="joinText"></div>
+          <div class="lobby-teams">
+            <div class="lt a"><input id="nameA" maxlength="20" value="Team Orange" aria-label="Orange team name"><div><strong id="lnA">0</strong>players</div></div>
+            <div class="lt b"><input id="nameB" maxlength="20" value="Team Purple" aria-label="Purple team name"><div><strong id="lnB">0</strong>players</div></div>
+          </div>
+          <button class="go" id="goBtn">Start round</button>
+        </div>
+      </div>
+    </div>
+    <div class="overlay" id="count"><div id="countNum">3</div></div>
+    <div class="overlay" id="result">
+      <div class="card">
+        <h2 id="resTitle">Team wins!</h2>
+        <div class="rstats">
+          <div class="rs a"><b id="rsNameA">Orange</b><span><strong id="rsPA">0</strong> players</span><span><strong id="rsTA">0</strong> taps</span><span><strong id="rsCA">0</strong> taps per player</span></div>
+          <div class="rs b"><b id="rsNameB">Purple</b><span><strong id="rsPB">0</strong> players</span><span><strong id="rsTB">0</strong> taps</span><span><strong id="rsCB">0</strong> taps per player</span></div>
+        </div>
+        <button class="go" id="nextBtn">Next round</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="meters">
+    <div class="meter" id="meterA"><div class="m-top"><span class="m-name" id="mNameA">Team Orange</span><span class="m-n"><b id="mNA">0</b> players</span></div>
+      <div class="bar"><i id="barA"></i></div><div class="m-sub"><span>Taps per player per second</span><b id="mRA">0.0</b></div></div>
+    <div class="meter" id="meterB"><div class="m-top"><span class="m-name" id="mNameB">Team Purple</span><span class="m-n"><b id="mNB">0</b> players</span></div>
+      <div class="bar"><i id="barB"></i></div><div class="m-sub"><span>Taps per player per second</span><b id="mRB">0.0</b></div></div>
+  </section>
+
+  <div class="overlay" id="pinbox"><div class="card"><h2>Host PIN</h2><input id="pinIn" type="password" inputmode="numeric" autocomplete="off" maxlength="12" aria-label="Host PIN"><p id="pinErr" role="alert"></p><button class="go" id="pinGo">Open host screen</button></div></div>
+  <canvas id="fx"></canvas>
+  <div class="toast" id="toast" role="status"></div>
+
+  <aside id="pilot" aria-label="Pilot tools">
+    <h3>Connection</h3>
+    <div class="kv"><span>Server connection</span><b id="tConn">no</span></b></div>
+    <div class="kv"><span>Connected devices</span><b id="tBc">0</b></div>
+    <h3>Crowd</h3>
+    <div class="kv"><span>Real players</span><b id="tPl">0</b></div>
+    <div class="kv"><span>Orange / Purple</span><b id="tPlT">0 / 0</b></div>
+    <div class="kv"><span>Tapped in last 2 s</span><b id="tAct">0</b></div>
+    <div class="kv"><span>Tapped this round (O / P)</span><b id="tTap">0 / 0</b></div>
+    <div class="kv"><span>Simulated players</span><b id="tSim">0</b></div>
+    <div class="warn hide" id="tCap">The server is running slowly. Check the machine or host plan before the event.</div>
+    <h3>Load</h3>
+    <div class="kv"><span>Taps per second (all)</span><b id="tTps">0</b></div>
+    <div class="kv"><span>Peak this round</span><b id="tPk">0</b></div>
+    <div class="kv"><span>Messages received per second</span><b id="tUpd">0</b></div>
+    <div class="kv"><span>Data sent per second (KB)</span><b id="tOut">0</b></div>
+    <div class="kv"><span>Server tick avg / max (ms)</span><b id="tTick">0 / 0</b></div>
+    <div class="kv"><span>Host frame rate</span><b id="tFps">0</b></div>
+    <h3>Dry run</h3>
+    <div class="fld"><label for="simA">Simulated Orange players</label><input type="range" id="simA" min="0" max="300" step="5" value="0"></div>
+    <div class="fld"><label for="simB">Simulated Purple players</label><input type="range" id="simB" min="0" max="300" step="5" value="0"></div>
+    <div class="fld"><label for="simBias">Orange effort vs Purple</label><input type="range" id="simBias" min="-40" max="40" step="5" value="0"></div>
+    <h3>Round</h3>
+    <div class="fld"><label for="durSel">Round length</label><select id="durSel"><option value="30">30 seconds</option><option value="45" selected>45 seconds</option><option value="60">60 seconds</option></select></div>
+    <div class="fld"><label for="joinIn">Join link</label><input type="text" id="joinIn" placeholder="Auto: this site"></div>
+    <button class="pbtn o" id="bExport">Export results (CSV)</button>
+    <button class="pbtn" id="bReset">Reset series</button>
+    <h3>Recent rounds</h3>
+    <table class="log" id="logT"><thead><tr><th>#</th><th>Win</th><th>Taps O/P</th><th>Peak</th></tr></thead><tbody></tbody></table>
+  </aside>
+</main>
+</div>
+
+
+<div id="howto" class="modal" role="dialog" aria-modal="true" aria-label="How to play Tug of War">
+  <div class="ht-frame">
+    <video id="htVideo" playsinline preload="none" poster="media/tug-howto-poster.jpg"><source id="htSrc" src="media/tug-howto.mp4" type="video/mp4"></video>
+    <button class="ht-btn ht-skip" id="htSkip">Skip</button>
+    <button class="ht-btn ht-mute" id="htMute" aria-pressed="false">Sound on</button>
+    <div class="ht-load" id="htLoad" role="status">Loading video</div>
+    <div class="ht-bar" aria-hidden="true"><i id="htProg"></i></div>
+    <div class="ht-end" id="htEnd"><button class="go" id="htPlay">Let's play</button><button class="linkbtn" id="htAgain">Watch again</button></div>
+  </div>
+</div>
+<script src="vendor/qrcode.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
