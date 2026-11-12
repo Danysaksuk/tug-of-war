@@ -1,0 +1,14 @@
+{
+  "name": "tug-of-war",
+  "version": "1.0.0",
+  "description": "Tug of War: a live crowd game for the Rider Gala Gaming Village. Phones tap, the big screen shows the rope.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "loadtest": "node loadtest.js"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": { "ws": "^8.18.0" },
+  "license": "UNLICENSED",
+  "private": true
+}
